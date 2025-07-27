@@ -12,6 +12,7 @@ class Lesson extends Model
         'order',
         'title',
         'slug',
+        'thumbnail',
         'path_video',
         'views',
         'hours',

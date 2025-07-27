@@ -20,7 +20,7 @@ class TeacherFactory extends Factory
             'slug' => $this->faker->unique()->slug(),
             'name' => $this->faker->name(),
             'avatar' => $this->faker->imageUrl(200, 200, 'people'),
-            'channels_path' => $this->faker->url(),
+            'channel_id' => $this->faker->url(),
         ];
     }
 }

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
-            // $table->foreignId('teacher_id')->nullable()->constrained()->OnDelete('set null');
             $table->integer('order')->default(0);
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('path_video')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->string('views')->default(0);
             $table->string('hours')->default(0);
             $table->string('minutes')->default(0);

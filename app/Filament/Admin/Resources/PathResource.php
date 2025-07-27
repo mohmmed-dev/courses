@@ -2,10 +2,12 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\CourseResource\RelationManagers\TagsRelationManager;
 use App\Filament\Admin\Resources\PathResource\Pages;
 use App\Filament\Admin\Resources\PathResource\RelationManagers;
 use App\Filament\Admin\Resources\PathResource\RelationManagers\CoursesRelationManager;
 use App\Models\Path;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -80,6 +82,7 @@ class PathResource extends Resource
     {
         return [
             CoursesRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 

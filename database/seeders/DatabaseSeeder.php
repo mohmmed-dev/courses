@@ -57,7 +57,6 @@ class DatabaseSeeder extends Seeder
         // Create lessons and relate to courses and teachers
         $lessons = Lesson::factory(50)->make()->each(function ($lesson) use ($courses, $teachers) {
             $lesson->course_id = $courses->random()->id;
-            $lesson->teacher_id = $teachers->random()->id;
             $lesson->save();
         });
 

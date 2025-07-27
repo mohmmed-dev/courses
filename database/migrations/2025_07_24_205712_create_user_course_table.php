@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_lessons', function (Blueprint $table) {
+        Schema::create('user_course', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('lesson_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->enum('status',['none','Stopped', 'continuous','completed'])->default('none');
-            $table->string('stop')->nullable();
-            $table->string('notes')->nullable();
+            $table->boolean('is_favorite')->default(0);
+            $table->tinyInteger('nomination')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_lessons');
+        Schema::dropIfExists('user_courses');
     }
 };

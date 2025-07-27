@@ -15,8 +15,8 @@ class Course extends Model
         'title',
         'slug',
         'description',
-        'path_image',
-        'youtube_path',
+        'thumbnail',
+        'youtube_id',
         'language',
     ];
 
@@ -39,11 +39,11 @@ class Course extends Model
 
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 
     public function paths() {
-        return $this->belongsToMany(Path::class,'course_paths')->withPivot(['order'])
+        return $this->belongsToMany(Path::class)->withPivot(['order'])
             ->withTimestamps();
     }
 

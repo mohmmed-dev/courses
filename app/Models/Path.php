@@ -20,7 +20,7 @@ class Path extends Model
 
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 
     public function category() {
@@ -28,7 +28,7 @@ class Path extends Model
     }
 
     public function courses() {
-        return $this->belongsToMany(Course::class,'course_paths')->withPivot(['order'])
+        return $this->belongsToMany(Course::class)->withPivot(['order'])
             ->withTimestamps();
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->string('avatar')->nullable();
-            $table->string('channels_path')->nullable();
+            $table->string('channel_id')->nullable();
             $table->timestamps();
         });
     }

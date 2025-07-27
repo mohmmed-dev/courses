@@ -22,8 +22,8 @@ class CourseFactory extends Factory
             'title' => $this->faker->sentence(3),
             'slug' => $this->faker->unique()->slug(),
             'description' => $this->faker->paragraph(),
-            'path_image' => $this->faker->imageUrl(640, 480, 'education'),
-            'youtube_path' => 'https://youtube.com/' . $this->faker->unique()->word(),
+            'thumbnail' => "https://i.ytimg.com/vi/XiRdPYcJOBQ/hqdefault.jpg",
+            'youtube_id' => 'https://youtube.com/' . $this->faker->unique()->word(),
             'language' => $this->faker->randomElement(['arabic', 'english']),
         ];
     }

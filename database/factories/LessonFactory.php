@@ -18,10 +18,10 @@ class LessonFactory extends Factory
     {
         return [
             'course_id' => null, // to be set in seeder
-            'teacher_id' => null, // to be set in seeder
             'order' => $this->faker->numberBetween(1, 20),
             'title' => $this->faker->sentence(3),
             'slug' => $this->faker->unique()->slug(),
+            'thumbnail' => "https://i.ytimg.com/vi/XiRdPYcJOBQ/hqdefault.jpg",
             'path_video' => $this->faker->url(),
             'views' => $this->faker->numberBetween(0, 1000),
             'hours' => $this->faker->numberBetween(0, 10),

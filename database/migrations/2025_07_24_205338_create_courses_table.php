@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title')->index();
             $table->string('slug')->unique()->index();
             $table->text('description')->nullable();
-            $table->string('path_image')->nullable();
-            $table->string('youtube_path');
+            $table->string('thumbnail')->nullable();
+            $table->string('youtube_id')->nullable();
             $table->enum('language' , ['arabic','english'])->default('arabic');
             $table->timestamps();
         });

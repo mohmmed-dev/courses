@@ -30,7 +30,7 @@ class TagResource extends Resource
             ->schema([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('name')->unique(Tag::class, 'name', fn ($record) => $record)
                             ->required()
                             ->maxLength(255)->live()
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),

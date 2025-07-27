@@ -30,14 +30,15 @@ class CategoryResource extends Resource
             ->schema([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('name')->unique(Category::class, 'name', fn ($record) => $record)
                             ->required()
                             ->maxLength(255)->live()
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')->required()
-                        ->maxLength(255)
+                            Forms\Components\TextInput::make('slug')->required()
+                            ->maxLength(255)
                             ->unique(Category::class, 'slug', fn ($record) => $record)
                             ->live(),
+                            Forms\Components\Textarea::make('description')->columnSpanFull()->maxLength(1024),
                     ])->columns(2)
             ]);
     }

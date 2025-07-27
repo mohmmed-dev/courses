@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\CourseResource\Pages;
 use App\Filament\Admin\Resources\CourseResource\RelationManagers;
+use App\Filament\Admin\Resources\CourseResource\RelationManagers\TagsRelationManager;
 use App\Models\Course;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -38,9 +39,9 @@ class CourseResource extends Resource
                             ->maxLength(255),
                         Forms\Components\Textarea::make('description')->visibleOn('edit')
                             ->columnSpanFull(),
-                        Forms\Components\FileUpload::make('path_image')->visibleOn('edit')
+                        Forms\Components\FileUpload::make('thumbnail')->visibleOn('edit')
                             ->image(),
-                        Forms\Components\TextInput::make('youtube_path')
+                        Forms\Components\TextInput::make('youtube_id')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Select::make('language')
@@ -56,6 +57,7 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumbnail'),
                 Tables\Columns\TextColumn::make('teacher.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
@@ -64,8 +66,7 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('path_image'),
-                Tables\Columns\TextColumn::make('youtube_path')
+                Tables\Columns\TextColumn::make('youtube_id')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('language'),
             ])
@@ -85,7 +86,7 @@ class CourseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TagsRelationManager::class
         ];
     }
 

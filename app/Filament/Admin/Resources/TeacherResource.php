@@ -30,14 +30,14 @@ class TeacherResource extends Resource
                 Section::make()->schema([
                     Forms\Components\TextInput::make('slug')
                         ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('name')
+                        ->maxLength(255)->visibleOn("edit"),
+                    Forms\Components\TextInput::make('name')->visibleOn("edit")
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('avatar')
+                    Forms\Components\TextInput::make('avatar')->visibleOn("edit")
                         ->maxLength(255)
                         ->default(null),
-                    Forms\Components\TextInput::make('channels_path')
+                    Forms\Components\TextInput::make('channel_id')
                         ->maxLength(255)
                         ->default(null),
                 ])->columns(2),
@@ -52,18 +52,9 @@ class TeacherResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('avatar')
+                Tables\Columns\ImageColumn::make('avatar')->circular(),
+                Tables\Columns\TextColumn::make('channel_id')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('channels_path')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

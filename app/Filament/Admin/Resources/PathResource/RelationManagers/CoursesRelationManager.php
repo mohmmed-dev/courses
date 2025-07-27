@@ -29,8 +29,10 @@ class CoursesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('order'),
+                Tables\Columns\ImageColumn::make('thumbnail')
+                ->size(80),
+                Tables\Columns\TextColumn::make('title'),
             ])
             ->filters([
                 //
