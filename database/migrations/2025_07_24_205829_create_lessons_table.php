@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('teacher_id')->nullable()->constrained()->OnDelete('set null');
+            // $table->foreignId('teacher_id')->nullable()->constrained()->OnDelete('set null');
             $table->integer('order')->default(0);
             $table->string('title');
             $table->string('slug')->unique();

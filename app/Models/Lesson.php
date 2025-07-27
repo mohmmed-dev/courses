@@ -8,7 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    //
+    protected $fillable = [
+        'order',
+        'title',
+        'slug',
+        'path_video',
+        'views',
+        'hours',
+        'minutes',
+        'second',
+    ];
     public function course() {
         return $this->belongsTo(Course::class);
     }

@@ -18,32 +18,36 @@ class CourseResource extends Resource
 {
     protected static ?string $model = Course::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?int $navigationSort = 0;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make()->schema([
-                    Forms\Components\Select::make('teacher')->relationship('teacher', 'name')
+                    Forms\Components\Select::make('teacher_id')->label('Teachers')->relationship('teacher', 'name')
                             ->required(),
-                        Forms\Components\Select::make('category')->relationship('category', 'name')
+                        Forms\Components\Select::make('category_id')->label('Categories')->relationship('category', 'name')
                             ->required(),
-                        Forms\Components\TextInput::make('title')
+                        Forms\Components\TextInput::make('title')->visibleOn('edit')
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('slug')
+                        Forms\Components\TextInput::make('slug')->visibleOn('edit')
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\Textarea::make('description')
+                        Forms\Components\Textarea::make('description')->visibleOn('edit')
                             ->columnSpanFull(),
-                        Forms\Components\FileUpload::make('path_image')
+                        Forms\Components\FileUpload::make('path_image')->visibleOn('edit')
                             ->image(),
                         Forms\Components\TextInput::make('youtube_path')
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('language')
-                            ->required(),
+                        Forms\Components\Select::make('language')
+                            ->options([
+                                'arabic' => __('Arabic'),
+                                'english' => __('English'),
+                            ])->required()
                     ])->columns(2),
                 ]);
     }

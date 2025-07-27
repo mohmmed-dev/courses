@@ -2,27 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use Alaouy\Youtube\Facades\Youtube;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use Google\Client;
-use Google\Service\YouTube;
+
 
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $apiKey = 'AIzaSyAWEuaOUdFXBOr7bJyrO1WaaiQs0Eb-L5Q';
-        $client = new Client();
-        $client->setDeveloperKey($apiKey);
-        $server = new YouTube($client);
-        $response = $server->search->listSearch('snippet', [
-            'q' => 'Laravel',
-            'maxResults' => 10,
-            'type' => 'video',
-        ]);
 
-        dd($response);
+        // watch?v=cTvqNc82NJ0&list=PLDoPjvoNmBAz7wegzgoJvVJdr-WwE5Pwt
+        // $video = Youtube::getVideoInfo('cTvqNc82NJ0');
+
+
+        // $channel = Youtube::getChannelById('UCk1SpWNzOs4MYmr0uICEntg');
+
+        // // Get playlist by ID, return an STD PHP object
+        // $playlist = Youtube::getPlaylistById('PLDoPjvoNmBAz7wegzgoJvVJdr-WwE5Pwt');
+        // $info = $playlist;
+
+        // // Get playlists by multiple ID's, return an array of STD PHP objects
+        // $playlists = Youtube::getPlaylistById(['PL590L5WQmH8fJ54F369BLDSqIwcs-TCfs', 'PL590L5WQmH8cUsRyHkk1cPGxW0j5kmhm0']);
+
+        // // Get playlist by channel ID, return an array of PHP objects
+        // $playlists = Youtube::getPlaylistsByChannelId('UCk1SpWNzOs4MYmr0uICEntg');
+
+        // // Get items in a playlist by playlist ID, return an array of PHP objects
+        $lessons = Youtube::getPlaylistItemsByPlaylistId('PLDoPjvoNmBAz7wegzgoJvVJdr-WwE5Pwt');
+        foreach($lessons['results'] as $lesson) {
+            $info = $lesson->snippet;
+            $title = $info->title;
+            $description = $info->description;
+            $order = $info->position;
+            $title = $info->thumbnails->high->url;
+            dump($lesson);
+        }
+
         $courses = Course::paginate(30);
         return view('home' , compact('courses'));
     }
