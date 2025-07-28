@@ -1,9 +1,9 @@
 <div class="card bg-base-100 shadow-sm">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
     <figure>
-        <img
-        src="{{$course->path_image}}"
-        alt="Shoes" />
+        <img class=""
+        src="{{$course->thumbnail}}"
+        alt="{{$course->slug}}" />
     </figure>
     <a href="{{route('course.show',$course->slug)}}" class="card-body p-2">
         <h2 class="card-title">

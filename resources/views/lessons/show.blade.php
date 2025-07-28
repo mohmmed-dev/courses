@@ -17,12 +17,10 @@
             </div>
         </div>
         <div class="my-2 col-start-2 w-full h-full col-span-10 sm:col-start-0 sm:col-span-12 md:col-span-6 lg:col-span-6 rounded-md">
-            <ul class="list bg-base-100 rounded-box shadow-md h-96 overflow-y-auto">
-                @forelse ($lessons as $lesson)
-                    @livewire('lessons.lesson', ['lesson' => $lesson], key($lesson->slug))
-                @empty
-                @endforelse
-            </ul>
+            {{-- @livewire('lessons.lessons', ['course' => $course], key($course->slug)) --}}
+        </div>
+        <div class="my-2 col-start-2 w-full h-full col-span-10 sm:col-start-0 sm:col-span-12 md:col-span-6 lg:col-span-8 bg-slate-500">
+            @livewire('comments.box', ['user' => $user], key($user->id))
         </div>
     </div>
 </x-app-layout>

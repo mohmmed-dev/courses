@@ -55,4 +55,17 @@ class Course extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function asyncLessons(array $lessons): void
+    {
+        $existingIds = [];
+        foreach ($lessons as $lessonDate) {
+            $lesson = $this->lessons()->updateOrCreate(
+                $lessonDate
+            );
+            $existingIds[] = $lesson->path_video;
+        }
+            $this->lessons()->whereNotin('path_video',$existingIds)->delete();
+        
+    }
+
 }

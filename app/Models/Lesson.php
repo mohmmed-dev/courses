@@ -19,6 +19,12 @@ class Lesson extends Model
         'minutes',
         'second',
     ];
+
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'slug';
+    // }
+
     public function course() {
         return $this->belongsTo(Course::class);
     }
