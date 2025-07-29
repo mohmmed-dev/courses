@@ -1,6 +1,6 @@
 <div>
     {{-- Do your work, then step back. --}}
-    @can('update_comment', $comment)
+ {{-- @can('update_comment', $comment)--}}
     <div class="absolute z-10  left-2 top-2 flex gap-x-1">
         <a wire:click="updateComment()" class=" cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0288d1" class="size-5">
@@ -17,9 +17,9 @@
             </button>
         </form>
     </div>
-    @endcan
+   {{-- @endcan --}}
     <a href="" class="flex items-center">
-        <img class=" h-10 w-10   rounded-full " src="{{$comment->user->profilePhotoPath()}}" alt="">
+        <img class=" h-10 w-10   rounded-full " src="{{$comment->user->avatar}}" alt="">
         <div class="mx-2">
             <h5 class=" text-md font-bold tracking-tight text-gray-900 ">{{$comment->user->name}}</h5>
             <h5 class="text-sm tracking-tight text-gray-900 ">{{$comment->created_at->diffForHumans()}}</h5>
@@ -34,9 +34,7 @@
             <div class="w-3/4">
                 <input type="text" wire:model="bodyUpdate" required class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " >
             </div>
-            <x-button>
-                {{__("Update")}}
-            </x-button>
+            <button className="btn btn-info">{{__("Update")}}</button>
         </form>
         @endif
     </div>

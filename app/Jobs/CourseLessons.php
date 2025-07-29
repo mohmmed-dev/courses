@@ -72,7 +72,6 @@ class CourseLessons implements ShouldQueue
                         $allPlaylistItemsRaw[$videoId] = [
                             'order' => $orderCounter, // ترتيب مؤقت للحفاظ على الترتيب الأصلي
                             'title' => $item->snippet->title,
-                            'slug' => Slug::uniqueSlug($item->snippet->title,'lessons'),
                             'thumbnail' => $item->snippet->thumbnails->default->url ?? null,
                             'path_video' => $videoId, // حفظ ID مؤقتا للربط
                         ];

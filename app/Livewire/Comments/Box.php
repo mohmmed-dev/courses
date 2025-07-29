@@ -3,14 +3,19 @@
 namespace App\Livewire\Comments;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
+//use Livewire\Component;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Gate;
 
 class Box extends Component
 {
      public $comment;
     public $update = false;
+    public $type;
     public $bodyUpdate;
        public function updateComment() {
-        Gate::authorize('update_comment',$this->comment);
+        //Gate::authorize('update_comment',$this->comment);
         if($this->update) {
             $this->update = false;
             $this->dispatch('update');
@@ -23,7 +28,7 @@ class Box extends Component
     }
 
         public function update_comment($id) {
-            Gate::authorize('update_comment',$this->comment);
+         //   Gate::authorize('update_comment',$this->comment);
             $comment = Comment::findOrFail($id);
             $comment->body = $this->bodyUpdate;
             $comment->save();
@@ -31,10 +36,10 @@ class Box extends Component
         }
 
     public function delete_comment($id) {
-        Gate::authorize('update_comment',$this->comment);
+       // Gate::authorize('update_comment',$this->comment);
         $comment = Comment::findOrFail($id);
         $comment->delete();
-        $this->dispatch('comment');
+        $this->dispatch($this->type);
     }
     #[On('update')]
     public function render()

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('youtube_id')->nullable();
+            $table->boolean('is_public')->default(1);
+            $table->integer('time')->default(0);
+            $table->integer('views')->default(0);
             $table->enum('language' , ['arabic','english'])->default('arabic');
             $table->timestamps();
         });

@@ -7,14 +7,15 @@ use Livewire\Component;
 class CommentForm extends Component
 {
     public $lesson;
-    public $user;
     public $comment;
     public $body = '';
+    public $type;
     function save() {
+        //dd($this->body);
         $this->lesson->comments()->create([
             'body' => $this->body,
-            'user_id' => $this->user,
-            'parent_id' => $this->comment ?? 0
+            'user_id' => auth()->id(),
+            'parent_id' => $this->comment
         ]);
         $this->body = '';
         // $notification = new Notification();
@@ -27,7 +28,7 @@ class CommentForm extends Component
         // $alert->alerts++;
         // $alert->save();
         // $this->dispatch('alert');
-        // $this->dispatch('comment');
+        $this->dispatch($this->type);
     }
     public function render()
     {

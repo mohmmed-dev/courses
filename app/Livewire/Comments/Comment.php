@@ -3,21 +3,17 @@
 namespace App\Livewire\Comments;
 
 use Livewire\Component;
+use App\Models\Comment as ModelsComment;
+use Livewire\Attributes\On;
 
 class Comment extends Component
 {
-     public $comment;
-    public $update = false;
-    public $replays = false;
-    public $video;
-    public $bodyUpdate;
-    public function showRepay() {
-        if($this->replays) {
-            $this->replays = false;
-            return;
-        }
-        $this->replays = true;
-        return;
+    public ModelsComment $comment;
+    public $lesson;
+    public $open = false;
+    #[On('replay')]
+    public function  getCommentsProperty() {
+        return $this->comment->replies;
     }
     public function render()
     {

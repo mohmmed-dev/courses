@@ -94,20 +94,20 @@ class DatabaseSeeder extends Seeder
         // }
 
         // Create comments and relate to users and courses
-        $comments = Comment::factory(30)->make()->each(function ($comment) use ($users, $courses) {
-            $comment->user_id = $users->random()->id;
-            $comment->course_id = $courses->random()->id;
-            $comment->save();
-        });
+        // $comments = Comment::factory(30)->make()->each(function ($comment) use ($users, $lessons) {
+        //     $comment->user_id = $users->random()->id;
+        //     $comment->lesson_id = $lessons->random()->id;
+        //     $comment->save();
+        // });
 
-        // Optionally, create replies for some comments
-        $comments->random(10)->each(function ($comment) use ($comments) {
-            $reply = Comment::factory()->make([
-                'user_id' => $comment->user_id,
-                'course_id' => $comment->course_id,
-                'parent_id' => $comment->id,
-            ]);
-            $reply->save();
-        });
+        // // Optionally, create replies for some comments
+        // $comments->random(10)->each(function ($comment) use ($comments) {
+        //     $reply = Comment::factory()->make([
+        //         'user_id' => $comment->user_id,
+        //         'lesson_id' => $comment->lesson_id,
+        //         'parent_id' => $comment->id,
+        //     ]);
+        //     $reply->save();
+        // });
     }
 }

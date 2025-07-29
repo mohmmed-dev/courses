@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Slug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,7 +49,7 @@ class Course extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(user::class);
+        return $this->belongsToMany(user::class,'user_course')->withPivot(['id','status','nomination','is_favorite'])->withTimestamps();
     }
 
     public function comments() {
@@ -58,9 +59,17 @@ class Course extends Model
     public function asyncLessons(array $lessons): void
     {
         $existingIds = [];
-        foreach ($lessons as $lessonDate) {
+        foreach ($lessons as $lessonData) {
+            $uniqueKey = ['path_video' => $lessonData['path_video']];
+            $existing = $this->lessons()->where($uniqueKey)->first();
+            if ($existing) {
+                $lessonData['slug'] = $existing->slug;
+            } else {
+                $lessonData['slug'] = Slug::uniqueSlug($lessonData['title'],'lessons');
+            }
             $lesson = $this->lessons()->updateOrCreate(
-                $lessonDate
+                $uniqueKey,
+                $lessonData
             );
             $existingIds[] = $lesson->path_video;
         }

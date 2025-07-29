@@ -32,4 +32,11 @@ class Lesson extends Model
     public function users() {
         return $this->belongsToMany(User::class);
     }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getComments() {
+        return $this->comments()->where("parent_id" , 0)->get();
+    }
 }
