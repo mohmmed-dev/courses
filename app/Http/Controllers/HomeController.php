@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Alaouy\Youtube\Facades\Youtube;
 use App\Helpers\Slug;
 use App\Models\Course;
+use App\Models\Path;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,14 @@ class HomeController extends Controller
         // $data = $this->getPlaylistVideos('PLoP3S2S1qTfCUdNazAZY1LFALcUr0Vbs9');
         // dd($data);
 
-        $courses = Course::paginate(30);
-        return view('home' , compact('courses'));
+        $courses = Course::paginate(20);
+        $paths = Path::all();
+        return view('home' , compact('courses','paths'));
+    }
+
+    public function search(Request $request) {
+        $courses = Course::where("title", "Like","%$request->search%")->paginate(5);
+        $paths = Path::where("title","Like","%$request->search%")->get();
+        return view("search",compact("courses","paths"));
     }
 }

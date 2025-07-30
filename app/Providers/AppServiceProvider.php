@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Facades\View::composer('home', CategoriesComposer::class);
+        Facades\View::composer('helpers.categories', CategoriesComposer::class);
     }
 }

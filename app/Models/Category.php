@@ -15,11 +15,16 @@ class Category extends Model
         'description',
     ];
 
-    public function course() {
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function courses() {
         return $this->hasMany(Course::class);
     }
 
-    public function Path() {
+    public function Paths() {
         return $this->hasMany(Path::class);
     }
 }

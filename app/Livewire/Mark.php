@@ -13,48 +13,59 @@ class Mark extends Component
     public function mount() {
         $this->check();
     }
-    
-    public function mark() {
-        dd('ff');
-        $user = auth()->user()->courses();
+
+    public function myMark() {
         $courseId = $this->id;
-        if(!$this->markCheck && !$this->courseCheck) {
+        $user = auth()->user()->courses();
+        $value = $this->markCheck ==  0 ? true : false;
+        if(!$this->markCheck && !$this->courseCheck && empty($mark)) {
             $user->toggle([$this->id => [
-                'nomination' => 1,
+                'nomination' => true,
             ]]);
         } else {
-            $user->updateExistingPivot($courseId, [
-            'nomination' => $this->markCheck ==  0 ? 1 : 0
-            ]);
+            if($value) {
+                $user->updateExistingPivot($courseId, [
+                    'nomination' => 1
+                ]);
+            } else {
+                $user->updateExistingPivot($courseId, [
+                    'nomination' => 0
+                ]);
+            }
         }
-        $this->check();
+        $this->markCheck = $value;
     }
 
-    public function mycoures() {
+    public function myCourse() {
         $courseId = $this->id;
         $user = auth()->user()->courses();
-
-        if(!$this->markCheck && !$this->courseCheck) {
+        $value = $this->courseCheck ==  0 ? true : false;
+        if(!$this->markCheck && !$this->courseCheck && empty($mark)) {
             $user->toggle([$this->id => [
-                'is_favorite' => 1,
+                'is_favorite' => true,
             ]]);
         } else {
-        $user->updateExistingPivot($courseId, [
-            'is_favorite' => $this->courseCheck ==  0 ? 1: 0
-            ]);
+            if($value) {
+                $user->updateExistingPivot($courseId, [
+                    'is_favorite' => 1
+                ]);
+            } else {
+                $user->updateExistingPivot($courseId, [
+                    'is_favorite' => 0
+                ]);
+            }
         }
-        $this->check();
+        $this->courseCheck = $value;
     }
 
     public function check() {
-        // ابحث عن الكورس بهذا الـ id
         $mark = auth()->user()->courses()->where('course_id', $this->id)->first();
+
         if($mark) {
-            // لا تغير قيمة $this->id حتى تبقى هي course_id
-            $this->courseCheck = (bool) $mark->pivot->nomination;
-            $this->markCheck = (bool) $mark->pivot->is_favorite;
+            $this->mark = $mark;
+            $this->courseCheck =  $mark->pivot->nomination;
+            $this->markCheck =  $mark->pivot->is_favorite;
         }
-        // dump($this->markCheck . $this->courseCheck); // يمكن التعليق أو الإزالة
     }
     public function render()
     {

@@ -15,12 +15,19 @@
                             <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
                         </svg>
                     </a>
-                    <a role="tab"  href="{{route('path')}}"  class="tab {{request()->routeIs('path') ?'tab-active'  : ''}}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-7">
+                        <form class="filter" action="{{ route('search') }}" method="GET">
+                            <div class="join">
+                                <div>
+                                    <label class="input  join-item">
+                                    <input class=" hover:border-none focus:border-none focus:outline-none hover:outline-none  border-none outline-none" type="text" placeholder="{{__("Search")}}" required />
+                                    </label>
+                                </div>
+                                <button class="btn btn-neutral join-item">  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                             <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />
                             <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
+                        </svg></button>
+                                </div>
+                        </form>
                 </div>
             </div>
 
@@ -72,7 +79,7 @@
                             </x-dropdown-link> --}}
                         </li>
                         <li>
-                            <x-dropdown-link :href="route('profile',auth()->user()->id)">
+                            <x-dropdown-link :href="route('profile',auth()->user()->username)">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                         </li>

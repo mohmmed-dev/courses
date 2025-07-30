@@ -10,12 +10,18 @@
                 <h2 class="text-3xl">Card Title</h2>
                 <h4>@jsjs</h4>
             </div>
-
         </div>
         <div role="tablist" class="tabs tabs-lift w-full">
-            <a role="tab" class="tab tab-active">{{__('Courses')}}</a>
-            <a role="tab" class="tab">{{__('Paths')}}</a>
-            <a role="tab" class="tab">{{__('Type')}}</a>
+            <a role="tab" href="{{route('profile',$user->username)}}" class="tab {{request()->routeIs('profile') ? "tab-active" : ''}}">{{__('Lesson')}}</a>
+            <a role="tab" href="{{route('profile.courses',$user->username)}}" class="tab {{request()->routeIs('profile.courses') ? "tab-active" : ''}}">{{__('Courses')}}</a>
+            <a role="tab" href="{{route('profile.paths',$user->username)}}" class="tab {{request()->routeIs('profile.paths') ? "tab-active" : ''}}">{{__('Paths')}}</a>
         </div>
     </div>
+    @if(request()->routeIs('profile.courses'))
+
+    @elseif(request()->routeIs('profile.paths'))
+
+    @else
+
+    @endif
 </x-app-layout>
