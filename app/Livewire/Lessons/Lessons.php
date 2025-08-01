@@ -13,7 +13,7 @@ class Lessons extends Component
 
     public function render()
     {
-      $lessons = $this->course->lessons()->paginate(1);
+      $lessons = $this->course->lessons()->paginate(10);
         return view('livewire.lessons.lessons',["lessons" => $lessons]);
     }
 }

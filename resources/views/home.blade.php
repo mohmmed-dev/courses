@@ -7,4 +7,5 @@
             @include('helpers.paths',['paths' => $paths])
         </div>
             @include('helpers.courses',['courses' => $courses])
+    </div>
 </x-app-layout>

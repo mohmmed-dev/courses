@@ -30,7 +30,9 @@ class Lesson extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_lesson')
+            ->withPivot(['id', 'status', 'stop', 'notes'])
+            ->withTimestamps();
     }
     public function comments(){
         return $this->hasMany(Comment::class);

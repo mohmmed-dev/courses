@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PathController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
@@ -15,6 +17,10 @@ Route::get('/course/{course}',  [CourseController::class, 'show'])->name('course
 Route::get('/search',  [HomeController::class, 'search'])->name('search');
 Route::get('/lesson/{lesson}',  [LessonController::class, 'show'])->name('lesson.show');
 Route::get("/category/{category}", [CategoryController::class,"show"])->name("category.show");
+Route::get("/teacher/{teacher}", TeacherController::class)->name("teacher.show");
+Route::get("/tag/{tag}", TagController::class)->name("tag.show");
+Route::view("/trau", 'trau')->name("category.sho");
+
 
 
 // Route::get('/dashboard', function () {

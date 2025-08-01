@@ -7,21 +7,18 @@
                 </div>
             </div>
             <div>
-                <h2 class="text-3xl">Card Title</h2>
-                <h4>@jsjs</h4>
+                <h2 class="text-3xl">{{$user->name}}</h2>
+                <a href="{{route('profile',$user->username)}}" >{{'@'.$user->username}}</a>
             </div>
         </div>
         <div role="tablist" class="tabs tabs-lift w-full">
-            <a role="tab" href="{{route('profile',$user->username)}}" class="tab {{request()->routeIs('profile') ? "tab-active" : ''}}">{{__('Lesson')}}</a>
-            <a role="tab" href="{{route('profile.courses',$user->username)}}" class="tab {{request()->routeIs('profile.courses') ? "tab-active" : ''}}">{{__('Courses')}}</a>
+            <a role="tab" href="{{route('profile',$user->username)}}" class="tab {{request()->routeIs('profile') ? "tab-active" : ''}}">{{__('Courses')}}</a>
             <a role="tab" href="{{route('profile.paths',$user->username)}}" class="tab {{request()->routeIs('profile.paths') ? "tab-active" : ''}}">{{__('Paths')}}</a>
+            {{-- <a role="tab" href="{{route('profile.courses',$user->username)}}" class="tab {{request()->routeIs('profile.courses') ? "tab-active" : ''}}">{{__('Courses')}}</a> --}}
         </div>
     </div>
-    @if(request()->routeIs('profile.courses'))
-
-    @elseif(request()->routeIs('profile.paths'))
-
+    @if(request()->routeIs('profile.paths'))
     @else
-
+    @livewire("filter-courses" , ["username" => $user->username])
     @endif
 </x-app-layout>

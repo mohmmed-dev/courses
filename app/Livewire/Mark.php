@@ -7,40 +7,20 @@ use Livewire\Component;
 class Mark extends Component
 {
     public $id;
-    public $markCheck = false;
-    public $courseCheck = false;
+    public $is_completed = false;
+    public $is_favorite = false;
+
     public $mark;
+
     public function mount() {
         $this->check();
     }
 
-    public function myMark() {
+    public function favorite() {
         $courseId = $this->id;
         $user = auth()->user()->courses();
-        $value = $this->markCheck ==  0 ? true : false;
-        if(!$this->markCheck && !$this->courseCheck && empty($mark)) {
-            $user->toggle([$this->id => [
-                'nomination' => true,
-            ]]);
-        } else {
-            if($value) {
-                $user->updateExistingPivot($courseId, [
-                    'nomination' => 1
-                ]);
-            } else {
-                $user->updateExistingPivot($courseId, [
-                    'nomination' => 0
-                ]);
-            }
-        }
-        $this->markCheck = $value;
-    }
-
-    public function myCourse() {
-        $courseId = $this->id;
-        $user = auth()->user()->courses();
-        $value = $this->courseCheck ==  0 ? true : false;
-        if(!$this->markCheck && !$this->courseCheck && empty($mark)) {
+        $value = $this->is_favorite ==  0 ? true : false;
+        if(!$this->is_completed && !$this->is_favorite && empty($mark)) {
             $user->toggle([$this->id => [
                 'is_favorite' => true,
             ]]);
@@ -55,16 +35,38 @@ class Mark extends Component
                 ]);
             }
         }
-        $this->courseCheck = $value;
     }
+
+    public function myCourse() {
+        $courseId = $this->id;
+        $user = auth()->user()->courses();
+        $value = $this->is_completed ==  0 ? true : false;
+        if(!$this->markCheck && !$this->is_completed && empty($mark)) {
+            $user->toggle([$this->id => [
+                'is_favorite' => true,
+            ]]);
+        } else {
+            if($value) {
+                $user->updateExistingPivot($courseId, [
+                    'is_favorite' => 1
+                ]);
+            } else {
+                $user->updateExistingPivot($courseId, [
+                    'is_favorite' => 0
+                ]);
+            }
+        }
+        $this->is_completed = $value;
+    }
+
 
     public function check() {
         $mark = auth()->user()->courses()->where('course_id', $this->id)->first();
 
         if($mark) {
             $this->mark = $mark;
-            $this->courseCheck =  $mark->pivot->nomination;
-            $this->markCheck =  $mark->pivot->is_favorite;
+            $this->is_completed =  $mark->pivot->is_completed;
+            $this->is_favorite =  $mark->pivot->is_favorite;
         }
     }
     public function render()

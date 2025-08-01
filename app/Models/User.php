@@ -70,14 +70,39 @@ class User extends Authenticatable
 
 
     public function courses() {
-        return $this->belongsToMany(Course::class,'user_course')->withPivot(['id','status','nomination','is_favorite'])->withTimestamps();
+        return $this->belongsToMany(Course::class)->withPivot(['id','is_completed','is_favorite','is_stop','value'])->withTimestamps();
     }
 
     public function lessons() {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(Lesson::class,'user_lesson')
+            ->withPivot(['id', 'status', 'stop', 'notes'])
+            ->withTimestamps();
     }
 
     public function paths() {
         return $this->belongsToMany(Path::class);
     }
+
+    public function getCourseProgress(Course $course)
+    {
+        $completedCount = $this->lessons()
+            ->wherePivot('stop', true)
+            ->whereIn('lesson_id', function ($query) use ($course) {
+                $query->select('id')->from('lessons')->where('course_id', $course->id);
+            })
+            ->count();
+
+        // الحصول على إجمالي عدد الدروس في الكورس
+        $totalLessonsCount = $course->lessons()->count();
+
+        // حساب عدد الدروس المتبقية
+        $remainingCount = $totalLessonsCount - $completedCount;
+
+        return [
+            'completed' => $completedCount,
+            'remaining' => $remainingCount,
+            'total' => $totalLessonsCount,
+        ];
+    }
+
 }

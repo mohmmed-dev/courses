@@ -16,6 +16,11 @@ class Teacher extends Model
         "channel_id"
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function courses() {
         return $this->hasMany(Course::class);
     }

@@ -49,7 +49,7 @@ class Course extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(user::class,'user_course')->withPivot(['id','status','nomination','is_favorite'])->withTimestamps();
+        return $this->belongsToMany(user::class)->withPivot(['id','is_completed','is_favorite','is_stop','value'])->withTimestamps();
     }
 
     public function comments() {
@@ -74,7 +74,14 @@ class Course extends Model
             $existingIds[] = $lesson->path_video;
         }
             $this->lessons()->whereNotin('path_video',$existingIds)->delete();
-        
     }
 
+    //  public function rate() {
+    //     return $this->ratings->isNotEmpty() ? $this->ratings()->sum('value') / $this->ratings()->count(): 0 ;
+    // }
+
+
+    public function rate() {
+        return $this->users->isNotEmpty() ? $this->users()->wherePivot('is_completed', 1)->sum('value') / $this->users()->wherePivot('is_completed', 1)->count() : 0;
+    }
 }

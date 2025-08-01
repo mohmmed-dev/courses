@@ -14,6 +14,12 @@ class Tag extends Model
         'slug',
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+
     public function courses()
     {
         return $this->morphedByMany(Course::class, 'taggable');
