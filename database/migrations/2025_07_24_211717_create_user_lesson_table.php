@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('lesson_id')->constrained()->cascadeOnDelete();
-            $table->enum('status',['none','Stopped', 'continuous','completed'])->default('none');
-            $table->string('stop')->nullable();
-            $table->string('notes')->nullable();
+            $table->boolean('is_completed')->default(0);
             $table->timestamps();
         });
     }

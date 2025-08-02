@@ -20,10 +20,10 @@ class Lesson extends Model
         'second',
     ];
 
-    // public function getRouteKeyName(): string
-    // {
-    //     return 'slug';
-    // }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function course() {
         return $this->belongsTo(Course::class);

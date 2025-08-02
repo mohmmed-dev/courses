@@ -77,7 +77,6 @@
                     @auth
                         @livewire('mark', ['id' => $course->id])
                     @else
-
                     @endauth
                     @php
                         $progress = auth()->check() ? auth()->user()->getCourseProgress($course) : [];

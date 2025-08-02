@@ -13,8 +13,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
+
         <script src="https://www.youtube.com/iframe_api"></script>
+           <script src="https://www.youtube.com/iframe_api"></script>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-300">
@@ -34,5 +36,11 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = new Plyr('#player');
+        });
     </body>
 </html>

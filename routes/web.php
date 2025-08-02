@@ -11,15 +11,14 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
-Route::get('/path',  [PathController::class, 'index'])->name('path');
-Route::get('/show',  [PathController::class, 'show'])->name('path.show');
+Route::get('/path',  [PathController::class, 'show'])->name('path.show');
 Route::get('/course/{course}',  [CourseController::class, 'show'])->name('course.show');
 Route::get('/search',  [HomeController::class, 'search'])->name('search');
 Route::get('/lesson/{lesson}',  [LessonController::class, 'show'])->name('lesson.show');
 Route::get("/category/{category}", [CategoryController::class,"show"])->name("category.show");
 Route::get("/teacher/{teacher}", TeacherController::class)->name("teacher.show");
 Route::get("/tag/{tag}", TagController::class)->name("tag.show");
-Route::view("/trau", 'trau')->name("category.sho");
+// Route::view("/trau", 'trau')->name("category.sho");
 
 
 
