@@ -33,7 +33,9 @@ class Path extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(user::class);
+        return $this->belongsToMany(user::class, 'user_path')
+            ->withPivot(['step'])
+            ->withTimestamps();
     }
 
 }

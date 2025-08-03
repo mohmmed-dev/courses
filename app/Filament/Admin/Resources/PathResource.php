@@ -40,8 +40,14 @@ class PathResource extends Resource
                         ->required()
                         ->maxLength(255),
                         Forms\Components\FileUpload::make('image_path')
-                            ->image(),
-                        Forms\Components\Textarea::make('desorption')
+                            ->image()
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('16:9')
+                            ->imageResizeTargetWidth('1920')
+                            ->imageResizeTargetHeight('1080'),
+                        Forms\Components\RichEditor::make('desorption')->disableToolbarButtons([
+                                    'attachFiles',
+                                ])
                             ->columnSpanFull(),
                         Forms\Components\Toggle::make('is_public')
                             ->required(),

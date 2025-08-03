@@ -75,18 +75,20 @@ class User extends Authenticatable
 
     public function lessons() {
         return $this->belongsToMany(Lesson::class,'user_lesson')
-            ->withPivot(['id', 'status', 'stop', 'notes'])
+            ->withPivot(['id', 'is_completed'])
             ->withTimestamps();
     }
 
     public function paths() {
-        return $this->belongsToMany(Path::class);
+        return $this->belongsToMany(Path::class,'user_path')
+            ->withPivot(['id', 'step'])
+            ->withTimestamps();
     }
 
     public function getCourseProgress(Course $course)
     {
         $completedCount = $this->lessons()
-            ->wherePivot('stop', true)
+            ->wherePivot('is_completed', true)
             ->whereIn('lesson_id', function ($query) use ($course) {
                 $query->select('id')->from('lessons')->where('course_id', $course->id);
             })

@@ -31,7 +31,7 @@ class Lesson extends Model
 
     public function users() {
         return $this->belongsToMany(User::class, 'user_lesson')
-            ->withPivot(['id', 'status', 'stop', 'notes'])
+            ->withPivot(['id', 'is_completed'])
             ->withTimestamps();
     }
     public function comments(){

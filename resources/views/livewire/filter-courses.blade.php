@@ -1,9 +1,12 @@
 <div>
     {{-- Care about people's approval and you will be their prisoner. --}}
     <div role="tablist" class="tabs tabs-box mt-3 w-fit mx-auto">
-        <a role="tab" wire:click="filter('is_favorite')" class="tab">{{__("mark")}}</a>
-        <a role="tab" wire:click="filter('nomination')" class="tab tab-active">{{__('Keep')}}</a>
-        <a role="tab" class="tab">{{__("FInsh")}}</a>
+        <a role="tab" wire:click="filter('is_favorite')" class="tab {{$type ==  'is_favorite' ? 'tab-active' : '' }} ">{{__("Favorite")}}</a>
+        <a role="tab" wire:click="filter('is_completed',0)" class="tab {{($type == 'is_completed' && $value == 0 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
+        <a role="tab" wire:click="filter('is_completed')" class="tab {{($type == 'is_completed' && $value == 1 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
+    </div>
+    <div class="w-fit mx-auto my-3" >
+        <span class="loading loading-dots loading-lg" wire:loading wire:target="filter"></span>
     </div>
     <div class="grid grid-cols-12  gap-1 px-4">
     @forelse ($this->courses as $course)

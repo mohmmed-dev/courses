@@ -10,15 +10,17 @@ class FilterCourses extends Component
    // public $username;
     public User $user;
     public $type;
+    public $value;
     public function mount($username) {
         $this->user = User::where('username', $username)->firstOrFail();
-        $this->filter("is_favorite");
+        $this->filter('is_completed',0);
     }
-    public function filter($type) {
+    public function filter($type , $value = 1) {
+        $this->value = $value;
         $this->type = $type;
     }
     public function getCoursesProperty() {
-        return $this->user->courses()->wherePivot($this->type, 1)->paginate(15);
+        return $this->user->courses()->wherePivot($this->type, $this->value)->paginate(15);
     }
     public function render()
     {

@@ -82,6 +82,14 @@ class Course extends Model
 
 
     public function rate() {
-        return $this->users->isNotEmpty() ? $this->users()->wherePivot('is_completed', 1)->sum('value') / $this->users()->wherePivot('is_completed', 1)->count() : 0;
+        if ($this->users->isEmpty()) {
+            return 0;
+        }
+        $totalValue = $this->users()->wherePivot('is_completed', 1)->sum('value');
+        if ($totalValue == 0) {
+            return 0;
+        }
+        $completedCount = $this->users()->wherePivot('is_completed', 1)->count();
+        return $completedCount > 0 ? $totalValue / $completedCount : 0;
     }
 }

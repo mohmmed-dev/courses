@@ -14,7 +14,7 @@ class PathController extends Controller
     // }
 
     public function show(Path $path) {
-
+        $path->load(['courses', 'tags', 'category'])->loadCount(['users', 'courses']);
         return view('paths.show',compact('path'));
     }
 }

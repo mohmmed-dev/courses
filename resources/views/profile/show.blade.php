@@ -18,7 +18,8 @@
         </div>
     </div>
     @if(request()->routeIs('profile.paths'))
+        @livewire("filter-paths" , ["username" => $user->username])
     @else
-    @livewire("filter-courses" , ["username" => $user->username])
+        @livewire("filter-courses" , ["username" => $user->username])
     @endif
 </x-app-layout>

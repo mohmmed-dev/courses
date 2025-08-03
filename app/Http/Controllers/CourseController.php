@@ -15,7 +15,7 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $course->load(['lessons']);
+        $course->load(['lessons'])->loadCount(["users","lessons"]);
         $lessons = $course->lessons;
         $lesson = $lessons->first();
         return view('courses.show', compact('course', 'lessons', 'lesson'));

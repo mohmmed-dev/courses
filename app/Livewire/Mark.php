@@ -20,7 +20,7 @@ class Mark extends Component
         $courseId = $this->id;
         $user = auth()->user()->courses();
         $value = $this->is_favorite ==  0 ? true : false;
-        if(!$this->is_completed && !$this->is_favorite && empty($mark)) {
+        if(!$this->is_completed && !$this->is_favorite && empty($this->mark)) {
             $user->toggle([$this->id => [
                 'is_favorite' => true,
             ]]);
@@ -41,18 +41,18 @@ class Mark extends Component
         $courseId = $this->id;
         $user = auth()->user()->courses();
         $value = $this->is_completed ==  0 ? true : false;
-        if(!$this->markCheck && !$this->is_completed && empty($mark)) {
+        if(!$this->markCheck && !$this->is_completed && empty($this->mark)) {
             $user->toggle([$this->id => [
                 'is_favorite' => true,
             ]]);
         } else {
             if($value) {
                 $user->updateExistingPivot($courseId, [
-                    'is_favorite' => 1
+                    'is_completed' => 1
                 ]);
             } else {
                 $user->updateExistingPivot($courseId, [
-                    'is_favorite' => 0
+                    'is_completed' => 0
                 ]);
             }
         }

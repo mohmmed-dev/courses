@@ -11,7 +11,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [HomeController::class, 'index'])->name('home');
-Route::get('/path',  [PathController::class, 'show'])->name('path.show');
+Route::get('/path/{path}',  [PathController::class, 'show'])->name('path.show');
 Route::get('/course/{course}',  [CourseController::class, 'show'])->name('course.show');
 Route::get('/search',  [HomeController::class, 'search'])->name('search');
 Route::get('/lesson/{lesson}',  [LessonController::class, 'show'])->name('lesson.show');
