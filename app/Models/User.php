@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function paths() {
         return $this->belongsToMany(Path::class,'user_path')
-            ->withPivot(['id', 'step'])
+            ->withPivot(['id', 'is_completed'])
             ->withTimestamps();
     }
 

@@ -16,6 +16,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Section;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Str;
+
+
 
 
 class PathResource extends Resource
@@ -42,9 +47,25 @@ class PathResource extends Resource
                         Forms\Components\FileUpload::make('image_path')
                             ->image()
                             ->imageResizeMode('cover')
-                            ->imageCropAspectRatio('16:9')
-                            ->imageResizeTargetWidth('1920')
-                            ->imageResizeTargetHeight('1080'),
+                            ->imageCropAspectRatio('16:9'),
+                            // ->afterStateUpdated(function (string $state) {
+                            // //     $fullPath = public_path('storage/' . $state);
+                            // //     // Image::read($fullPath)
+                            // //     //     ->resize(800, 450, function ($constraint) {
+                            // //     //         $constraint->aspectRatio();
+                            // //     //         $constraint->upsize();
+                            // //     //     })
+                            // //     //     ->save($fullPath);
+
+                            // // $upload = $state ? Storage::get($state) : null;
+                            // // $image = Image::read($upload)
+                            // //     ->resize(800, 450);
+
+                            // // Storage::put(
+                            // //     Str::random() . '.' . $upload->getClientOriginalExtension(),
+                            // //     $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)
+                            // // );
+                            // }),
                         Forms\Components\RichEditor::make('desorption')->disableToolbarButtons([
                                     'attachFiles',
                                 ])

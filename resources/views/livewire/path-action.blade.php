@@ -1,8 +1,8 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    {{-- Because she competes with no one, no one can compete with her. --}}
     <label class="swap swap-flip "  >
         <!-- this hidden checkbox controls the state -->
-    <input type="checkbox"  @checked($this->is_has_course) wire:click="myCourse" class="hidden" />
+        <input type="checkbox"  @checked($this->isJoin) wire:click="joanToPath" class="hidden" />
         <div class="swap-on btn btn-circle btn-info ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002" />
@@ -16,7 +16,7 @@
     </label>
     <label class="swap swap-flip"  >
         <!-- this hidden checkbox controls the state -->
-        <input type="checkbox"  @checked($this->is_favorite) wire:click="favorite" class="hidden" />
+        <input type="checkbox"  @checked($this->is_completed) @disabled(true) class="hidden" />
         <div class="swap-on btn btn-circle btn-warning ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 m-0">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -28,10 +28,4 @@
             </svg>
         </div>
     </label>
-    {{-- <div>{{$this->is_completed == 0 ? 'no': 'yes'}}</div>
-    <button class="btn btn-primary" wire:click="myMark">Primary</button> --}}
-    {{-- <button class="btn btn-neutral" wire:click="myCourse">Neutral</button> --}}
-    {{-- <div>{{$this->is_favorite == 0 ? 'no': 'yes'}}</div>
-    <button class="btn btn-primary" wire:click="myMark">Primary</button> --}}
-
 </div>

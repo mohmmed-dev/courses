@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('path_id')->constrained()->cascadeOnDelete();
-            $table->boolean('step')->default(0);
+            $table->boolean('is_completed')->default(0);
+            $table->unsignedInteger('value')->default(0);
+            $table->string('review')->nullable();
             $table->timestamps();
         });
     }

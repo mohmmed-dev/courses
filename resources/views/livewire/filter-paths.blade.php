@@ -2,8 +2,8 @@
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     {{-- Care about people's approval and you will be their prisoner. --}}
     <div role="tablist" class="tabs tabs-box mt-3 w-fit mx-auto">
-        <a role="tab" wire:click="filter('step',0)" class="tab {{($type == 'step' && $value == 0 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
-        <a role="tab" wire:click="filter('step',1)" class="tab {{($type == 'step' && $value == 1 ) ? 'tab-active' : '' }}">{{__('Not Complete')}}</a>
+        <a role="tab" wire:click="filter('is_completed',0)" class="tab {{($type == 'is_completed' && $value == 0 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
+        <a role="tab" wire:click="filter('is_completed',1)" class="tab {{($type == 'is_completed' && $value == 1 ) ? 'tab-active' : '' }}">{{__('Not Complete')}}</a>
     </div>
     <div class="w-fit mx-auto my-3" >
         <span class="loading loading-dots loading-lg" wire:loading wire:target="filter"></span>

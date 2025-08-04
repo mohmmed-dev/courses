@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
         // foreach ($users as $user) {
         //     $user->paths()->attach($paths->random(rand(1, 3))->pluck('id')->toArray(), [
         //         'status' => 'continuous',
-        //         'step' => rand(0, 5),
+        //         'is_completed' => rand(0, 5),
         //     ]);
         // }
 

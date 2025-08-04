@@ -48,7 +48,13 @@ class HomeController extends Controller
         // $data = $this->getPlaylistVideos('PLoP3S2S1qTfCUdNazAZY1LFALcUr0Vbs9');
         // dd($data);
 
-        $courses = Course::paginate(20);
+        $courses = Course::with(["teacher" => function($query) {
+        $query->select('id',"slug","name");
+        }])
+        ->withAvg(['users' => function ($query) {
+            $query->where('course_user.is_completed', true);
+        }], 'course_user.value')
+        ->paginate(20);
         $paths = Path::all();
         return view('home' , compact('courses','paths'));
     }
@@ -56,6 +62,8 @@ class HomeController extends Controller
     public function search(Request $request) {
         $courses = Course::where("title", "Like","%$request->search%")->paginate(5);
         $paths = Path::where("title","Like","%$request->search%")->get();
-        return view("search",compact("courses","paths"));
+        $title = $request->search;
+
+        return view("search",compact("courses","paths","title"));
     }
 }

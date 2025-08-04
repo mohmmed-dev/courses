@@ -49,7 +49,7 @@ class Course extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(user::class)->withPivot(['id','is_completed','is_favorite','is_stop','value'])->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot(['id','is_completed','is_favorite','is_stop','value'])->withTimestamps();
     }
 
     public function comments() {
@@ -82,6 +82,7 @@ class Course extends Model
 
 
     public function rate() {
+        return 0;
         if ($this->users->isEmpty()) {
             return 0;
         }
@@ -92,4 +93,13 @@ class Course extends Model
         $completedCount = $this->users()->wherePivot('is_completed', 1)->count();
         return $completedCount > 0 ? $totalValue / $completedCount : 0;
     }
+
+    public function completedByUsers()
+{
+    // يمكنك تسمية الجدول الوسيط حسب ما لديك، مثلاً 'course_user'
+    return $this->users()
+                ->wherePivot('is_completed', true); // إذا كان لديك عمود للتحقق
+}
+
+
 }

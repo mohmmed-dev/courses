@@ -17,6 +17,7 @@ class TagController extends Controller
         }])->loadCount('courses');
         $courses = $tag->courses()->paginate(10);
         $paths = $tag->paths;
-        return view('tags.show',compact('paths','courses'));
+        $title = $tag->name;
+        return view('tags.show',compact('paths','courses',"title"));
     }
 }

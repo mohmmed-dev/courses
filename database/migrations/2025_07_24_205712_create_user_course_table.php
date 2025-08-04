@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('is_favorite')->default(0);
             $table->boolean('is_stop')->default(0);
             $table->unsignedInteger('value')->default(0);
+            $table->string('review')->nullable();
             $table->timestamps();
         });
     }

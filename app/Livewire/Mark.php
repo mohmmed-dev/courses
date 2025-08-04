@@ -9,8 +9,7 @@ class Mark extends Component
     public $id;
     public $is_completed = false;
     public $is_favorite = false;
-
-    public $mark;
+    public $is_has_course = false;
 
     public function mount() {
         $this->check();
@@ -20,7 +19,7 @@ class Mark extends Component
         $courseId = $this->id;
         $user = auth()->user()->courses();
         $value = $this->is_favorite ==  0 ? true : false;
-        if(!$this->is_completed && !$this->is_favorite && empty($this->mark)) {
+        if(!$this->is_completed && !$this->is_favorite && empty($this->is_has_course)) {
             $user->toggle([$this->id => [
                 'is_favorite' => true,
             ]]);
@@ -38,25 +37,10 @@ class Mark extends Component
     }
 
     public function myCourse() {
-        $courseId = $this->id;
-        $user = auth()->user()->courses();
-        $value = $this->is_completed ==  0 ? true : false;
-        if(!$this->markCheck && !$this->is_completed && empty($this->mark)) {
-            $user->toggle([$this->id => [
-                'is_favorite' => true,
-            ]]);
-        } else {
-            if($value) {
-                $user->updateExistingPivot($courseId, [
-                    'is_completed' => 1
-                ]);
-            } else {
-                $user->updateExistingPivot($courseId, [
-                    'is_completed' => 0
-                ]);
-            }
+        if(!$this->is_has_course) {
+            auth()->user()->courses()->attach($this->id);
         }
-        $this->is_completed = $value;
+        $this->is_has_course = true;
     }
 
 

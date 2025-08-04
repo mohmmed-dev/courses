@@ -12,7 +12,7 @@ class FilterPaths extends Component
     public $value;
     public function mount($username) {
         $this->user = User::where('username', $username)->firstOrFail();
-        $this->filter('step',0);
+        $this->filter('is_completed',0);
     }
     public function filter($type , $value = 0) {
         $this->value = $value;
