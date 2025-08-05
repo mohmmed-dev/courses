@@ -95,11 +95,11 @@ class Course extends Model
     }
 
     public function completedByUsers()
-{
-    // يمكنك تسمية الجدول الوسيط حسب ما لديك، مثلاً 'course_user'
-    return $this->users()
-                ->wherePivot('is_completed', true); // إذا كان لديك عمود للتحقق
-}
+    {
+        // يمكنك تسمية الجدول الوسيط حسب ما لديك، مثلاً 'course_user'
+        return $this->users()
+                    ->wherePivot('is_completed', true); // إذا كان لديك عمود للتحقق
+    }
 
 
 }

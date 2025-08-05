@@ -107,4 +107,26 @@ class User extends Authenticatable
         ];
     }
 
+    public function getPathsProgress(Course $course)
+    {
+        $completedCount = $this->courses()
+            ->wherePivot('is_completed', true)
+           // ->whereIn('_id', function ($query) use ($course) {
+         //      $query->select('id')->from('lessons')->where('course_id', $course->id);
+          //  })
+            ->count();
+
+        // الحصول على إجمالي عدد الدروس في الكورس
+        $totalLessonsCount = $course->lessons()->count();
+
+        // حساب عدد الدروس المتبقية
+        $remainingCount = $totalLessonsCount - $completedCount;
+
+        return [
+            'completed' => $completedCount,
+            'remaining' => $remainingCount,
+            'total' => $totalLessonsCount,
+        ];
+    }
+
 }

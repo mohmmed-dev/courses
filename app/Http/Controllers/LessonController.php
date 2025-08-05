@@ -11,8 +11,18 @@ class LessonController extends Controller
 
     public function show(Lesson $lesson)
     {
+        // $lesson->increment('views');
+        // dd($lesson->increment('views'));
+        $is_completed = false;
+
+        // auth()->check() && $lesson->user()->where('user_id', auth() )
+        $lesson->load(['course']);
         $course = $lesson->course;
         $lessons = $course->lessons()->orderBy('order')->get();
-        return view('lessons.show', compact('lesson', 'course', 'lessons'));
+        $hoers_add_zero = sprintf('%02d', $lesson->hours);
+        $minutes_add_zero = sprintf('%02d', $lesson->minutes);
+        $second_add_zero = sprintf('%02d', $lesson->second);
+        $time = $hoers_add_zero . ':' . $minutes_add_zero . ':' . $second_add_zero;
+        return view('lessons.show', compact('lesson', 'course', 'lessons','time'));
     }
 }

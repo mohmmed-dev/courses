@@ -13,7 +13,10 @@ class Lessons extends Component
 
     public function render()
     {
-      $lessons = $this->course->lessons()->paginate(10);
+        $lessons = $this->course->lessons()->withCount(['users as is_completed' => function ($query) {
+                $query->where('user_lesson.is_completed', true)
+                    ->where('user_lesson.user_id', auth()->id());
+            }])->paginate(10);
         return view('livewire.lessons.lessons',["lessons" => $lessons]);
     }
 }

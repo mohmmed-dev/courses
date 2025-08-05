@@ -19,7 +19,7 @@ use Filament\Forms\Components\Section;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Str;
-
+use Illuminate\Http\UploadedFile;
 
 
 
@@ -36,9 +36,9 @@ class PathResource extends Resource
         return $form
            ->schema([
                 Section::make()->schema([
-                        Forms\Components\Select::make('category')->relationship('category', 'name')
+                        Forms\Components\Select::make('category_id')->relationship('category', 'name')
                             ->required(),
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('title')
                         ->required()
                         ->maxLength(255),
                         Forms\Components\TextInput::make('slug')
@@ -47,25 +47,20 @@ class PathResource extends Resource
                         Forms\Components\FileUpload::make('image_path')
                             ->image()
                             ->imageResizeMode('cover')
-                            ->imageCropAspectRatio('16:9'),
-                            // ->afterStateUpdated(function (string $state) {
-                            // //     $fullPath = public_path('storage/' . $state);
-                            // //     // Image::read($fullPath)
-                            // //     //     ->resize(800, 450, function ($constraint) {
-                            // //     //         $constraint->aspectRatio();
-                            // //     //         $constraint->upsize();
-                            // //     //     })
-                            // //     //     ->save($fullPath);
-
-                            // // $upload = $state ? Storage::get($state) : null;
-                            // // $image = Image::read($upload)
-                            // //     ->resize(800, 450);
-
-                            // // Storage::put(
-                            // //     Str::random() . '.' . $upload->getClientOriginalExtension(),
-                            // //     $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)
-                            // // );
-                            // }),
+                            ->disk('public')
+                            ->directory('images')
+                            ->imageCropAspectRatio('16:9')
+                            ->saveUploadedFileUsing(function (UploadedFile $file) {
+                                $image = Image::read($file->getRealPath());
+                                $image->resize(800, 800, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                    $constraint->upsize();
+                                });
+                                $pathName = Str::random(16) . time();
+                                $path =  $pathName . '.' . 'png';
+                                Storage::disk('public')->put("covers/".$path , $image->toPng());
+                                return  $path;
+                            }),
                         Forms\Components\RichEditor::make('desorption')->disableToolbarButtons([
                                     'attachFiles',
                                 ])

@@ -18,6 +18,7 @@ Route::get('/lesson/{lesson}',  [LessonController::class, 'show'])->name('lesson
 Route::get("/category/{category}", [CategoryController::class,"show"])->name("category.show");
 Route::get("/teacher/{teacher}", TeacherController::class)->name("teacher.show");
 Route::get("/tag/{tag}", TagController::class)->name("tag.show");
+Route::view("about-us","info.about-us")->name("about.us");
 // Route::view("/trau", 'trau')->name("category.sho");
 
 

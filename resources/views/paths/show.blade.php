@@ -5,7 +5,7 @@
             <div class="card bg-base-100 shadow-sm md:flex-row">
                 <figure class="relative overflow-hidden aspect-video  md:w-1/3">
                     <!-- نسبة 16:9 -->
-                    <img class="w-full h-[calc(100%+40px)] object-cover -top-5" src="https://i.ytimg.com/vi/XiRdPYcJOBQ/hqdefault.jpg" alt="{{$path->slug}}" />
+                    <img class="w-full h-[calc(100%+40px)] object-cover -top-5" src="{{asset('storage/covers/' . $path->image_path)}}" alt="{{$path->slug}}" />
                 </figure>
                 <div class="card-body p-2 md:w-2/3">
                     <h2 class="card-title text-2xl md:text-4xl">

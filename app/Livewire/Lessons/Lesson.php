@@ -26,15 +26,10 @@ class Lesson extends Component
         if(empty($this->user)) {
             return redirect()->route('lesson.show',$this->lesson->slug);
         }
-
         $lessonPivot = $this->user->lessons()->where("lesson_id",$this->lesson->id)->get();
-
-        if(empty($lessonPivot)) {
-            dd($lessonPivot );
+        if(count($lessonPivot) == 0) {
             $this->user->lessons()->attach($this->lesson->id);
-
         }
-
         return redirect()->route('lesson.show',$this->lesson->slug);
     }
 

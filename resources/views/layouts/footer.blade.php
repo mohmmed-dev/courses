@@ -1,11 +1,11 @@
-<footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-    <nav class="grid grid-flow-col gap-4">
-        <a class="link link-hover">About us</a>
-        <a class="link link-hover">Contact</a>
+<footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-5">
+    <nav class="grid grid-flow-col gap-2">
+        <a href="{{route('about.us')}}" class="link link-hover">{{__("About Us")}}</a>
+        {{-- <a class="link link-hover">Contact</a>
         <a class="link link-hover">Jobs</a>
-        <a class="link link-hover">Press kit</a>
+        <a class="link link-hover">Press kit</a> --}}
     </nav>
-    <nav>
+   {{-- <nav>
         <div class="grid grid-flow-col gap-4">
         <a>
             <svg
@@ -41,8 +41,8 @@
             </svg>
         </a>
         </div>
-    </nav>
+    </nav>--}}
     <aside>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
+        <p>© {{date('Y')}} - {{__('All right reserved by')}}</p>
     </aside>
 </footer>

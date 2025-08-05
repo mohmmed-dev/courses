@@ -9,6 +9,16 @@ class Path extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+    "category_id",
+    "user_id",
+    "title",
+    "slug",
+    "desorption",
+    "image_path",
+    "is_public",
+    ];
+
     public function getRouteKeyName(): string
     {
         return 'slug';
