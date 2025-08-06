@@ -12,10 +12,12 @@ class Lesson extends Component
     public $user;
     public $check;
     public $show = false;
+    public $is_completed;
 
     public function mount() {
         $this->show = request()->is("lesson/{$this->lesson->slug}");
         $this->user = auth()->user() ?? null;
+        $this->is_completed = $this->lesson->is_completed;
         // if(!empty($this->user) ) {
         //     $this->check = $this->user->lessons()->where("lesson_id",$this->lesson->id)->get();
         //     dump($this->check);
@@ -38,3 +40,4 @@ class Lesson extends Component
         return view('livewire.lessons.lesson');
     }
 }
+

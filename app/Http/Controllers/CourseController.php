@@ -15,9 +15,13 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        $course->load(['lessons'])->loadCount(["users","lessons"]);
+        $course->loadCount(["users","lessons","lessons as completed_lessons_count" => function($query) {
+            $query->whereHas('users', function ($q) {
+            $q->where('user_id', auth()->id())->where("is_completed",true);
+            });
+        }]);
+
         $lessons = $course->lessons;
-        $lesson = $lessons->first();
-        return view('courses.show', compact('course', 'lessons', 'lesson'));
+        return view('courses.show', compact('course', 'lessons'));
     }
 }

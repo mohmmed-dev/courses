@@ -10,6 +10,22 @@ class Lessons extends Component
 {
     use WithPagination;
     public Course $course;
+    public $progress;
+
+    public function mount() {
+        if(empty($this->course->completed_lessons_count) || empty($this->course->lessons_count)) {
+            $this->course->loadCount(["users", "lessons", "lessons as completed_lessons_count" => function($query) {
+                $query->whereHas('users', function ($q) {
+                    $q->where('user_id', auth()->id())->where("is_completed", true);
+                });
+            }]);
+        }
+        $this->progress = [
+            'completed' => $this->course->completed_lessons_count,
+            'remaining' => $this->course->lessons_count - $this->course->completed_lessons_count,
+            'total' => $this->course->lessons_count
+        ];
+    }
 
     public function render()
     {

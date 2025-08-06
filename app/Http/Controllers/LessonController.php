@@ -13,10 +13,13 @@ class LessonController extends Controller
     {
         // $lesson->increment('views');
         // dd($lesson->increment('views'));
-        $is_completed = false;
+       // $is_completed = false;
 
         // auth()->check() && $lesson->user()->where('user_id', auth() )
-        $lesson->load(['course']);
+        $lesson->load(['course'])->loadCount(['users as is_completed' => function ($query) {
+            $query->where('user_lesson.is_completed', true)
+                ->where('user_lesson.user_id', auth()->id());
+        }]);
         $course = $lesson->course;
         $lessons = $course->lessons()->orderBy('order')->get();
         $hoers_add_zero = sprintf('%02d', $lesson->hours);
