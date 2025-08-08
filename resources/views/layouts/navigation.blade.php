@@ -21,7 +21,7 @@
                                     <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />
                                     <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z" clip-rule="evenodd" />
                                 </svg>
-</div>
+                    </div>
                             <form class="filter hidden md:block " action="{{ route('search') }}" method="GET">
                                 <div class="join">
                                     <div>
@@ -42,7 +42,7 @@
                         <div class="dropdown dropdown-end">
                             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                                 <div class="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                    {{-- {!! auth()->user()->avatar->svg_code !!} --}}
                                 </div>
                             </div>
                             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
@@ -63,24 +63,27 @@
                                     </x-dropdown-link>
                                 </li>
                                 <li>
-                                <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                                </x-dropdown-link>
-                        </li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link
+                                        href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </li>
                             </ul>
                         </div>
                         @else
                             <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            class="btn btn-outline hidden  md:inline-flex"
                                 >
                                     Log in
                                 </a>
                             <a
                                 href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                         class="btn btn-outline">
                                 Register
                             </a>
                         @endauth
@@ -89,11 +92,11 @@
     </div>
 
 
-    <form  x-show="open" class="filter pt-3 pb-1" action="{{ route('search') }}" method="GET">
+    <form  x-show="open" class="filter pt-3 pb-1 md:hidden" action="{{ route('search') }}" method="GET">
         <div class="join">
             <div>
                 <label class="input  join-item">
-                <input name="search" value="{{request()->search}}" class=" hover:border-none focus:border-none focus:outline-none hover:outline-none w-2/3  border-none outline-none" type="text" placeholder="{{__("Search")}}" required />
+                <input name="search" value="{{request()->search}}" class="  hover:border-none focus:border-none focus:outline-none hover:outline-none   border-none outline-none" type="text" placeholder="{{__("Search")}}" required />
                 </label>
             </div>
             <button class="btn btn-neutral join-item">  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">

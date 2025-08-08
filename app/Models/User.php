@@ -20,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'avatar_id',
         'username',
         'email',
         'password',
@@ -60,6 +61,10 @@ class User extends Authenticatable
             ->implode('');
     }
 
+    public function avatar() {
+        return $this->belongsTo(Avatar::class);
+    }
+
     public function myPaths() {
         return $this->hasMany(Path::class);
     }
@@ -80,8 +85,8 @@ class User extends Authenticatable
     }
 
     public function paths() {
-        return $this->belongsToMany(Path::class,'user_path')
-            ->withPivot(['id', 'is_completed'])
+        return $this->belongsToMany(Path::class)
+            ->withPivot(['id','is_completed','is_favorite','value','review'])
             ->withTimestamps();
     }
 

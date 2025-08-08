@@ -49,7 +49,7 @@ class Course extends Model
     }
 
     public function users() {
-        return $this->belongsToMany(User::class)->withPivot(['id','is_completed','is_favorite','is_stop','value'])->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot(['id','is_completed','is_favorite','is_stop','value','review'])->withTimestamps();
     }
 
     public function comments() {
@@ -76,11 +76,6 @@ class Course extends Model
             $this->lessons()->whereNotin('path_video',$existingIds)->delete();
     }
 
-    //  public function rate() {
-    //     return $this->ratings->isNotEmpty() ? $this->ratings()->sum('value') / $this->ratings()->count(): 0 ;
-    // }
-
-
     public function rate() {
         return 0;
         if ($this->users->isEmpty()) {
@@ -96,7 +91,6 @@ class Course extends Model
 
     public function completedByUsers()
     {
-        // يمكنك تسمية الجدول الوسيط حسب ما لديك، مثلاً 'course_user'
         return $this->users()
                     ->wherePivot('is_completed', true); // إذا كان لديك عمود للتحقق
     }

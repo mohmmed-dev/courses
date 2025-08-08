@@ -15,6 +15,7 @@ class ProfileController extends Controller
 
     public function show(Request $request, User $user): View
     {
+        $user->load(['avatar'])->loadCount(['courses' , 'paths']);
         return view('profile.show',compact('user'));
     }
 
@@ -24,7 +25,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $request->user()->load('avatar'),
         ]);
     }
 

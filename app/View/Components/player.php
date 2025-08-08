@@ -11,9 +11,11 @@ class player extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $videoId;
+
+    public function __construct($videoId = null) // Make it optional
     {
-        //
+        $this->videoId = $videoId;
     }
 
     /**

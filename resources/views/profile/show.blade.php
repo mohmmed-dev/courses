@@ -3,7 +3,7 @@
         <div class="mb-7 p-6 flex gap-x-4 items-center ">
             <div class="avatar">
                 <div class="w-24 rounded-full">
-                    <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
+                    {!! $user->avatar->svg_code !!}
                 </div>
             </div>
             <div>
@@ -12,13 +12,12 @@
             </div>
         </div>
         <div role="tablist" class="tabs tabs-lift w-full">
-            <a role="tab" href="{{route('profile',$user->username)}}" class="tab {{request()->routeIs('profile') ? "tab-active" : ''}}">{{__('Courses')}}</a>
-            <a role="tab" href="{{route('profile.paths',$user->username)}}" class="tab {{request()->routeIs('profile.paths') ? "tab-active" : ''}}">{{__('Paths')}}</a>
-            {{-- <a role="tab" href="{{route('profile.courses',$user->username)}}" class="tab {{request()->routeIs('profile.courses') ? "tab-active" : ''}}">{{__('Courses')}}</a> --}}
+            <a role="tab" href="{{route('profile',$user->username)}}" class="tab {{request()->routeIs('profile') ? "tab-active" : ''}}">{{__('Courses')}} <span class="badge badge-soft badge-info mx-1">{{$user->courses_count}}</span></a>
+            <a role="tab" href="{{route('profile.paths',$user->username)}}" class="tab {{request()->routeIs('profile.paths') ? "tab-active" : ''}}">{{__('Paths')}}<span class="badge badge-soft badge-info mx-1">{{$user->paths_count}}</span></a>
         </div>
     </div>
     @if(request()->routeIs('profile.paths'))
-        @livewire("filter-paths" , ["username" => $user->username])
+        @livewire("filter-paths" , ["username" => $user->username ])
     @else
         @livewire("filter-courses" , ["username" => $user->username])
     @endif

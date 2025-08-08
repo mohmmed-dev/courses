@@ -1,9 +1,10 @@
 <div>
     {{-- Care about people's approval and you will be their prisoner. --}}
     <div role="tablist" class="tabs tabs-box mt-3 w-fit mx-auto">
-        <a role="tab" wire:click="filter('is_favorite')" class="tab {{$type ==  'is_favorite' ? 'tab-active' : '' }} ">{{__("Favorite")}}</a>
-        <a role="tab" wire:click="filter('is_completed',0)" class="tab {{($type == 'is_completed' && $value == 0 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
-        <a role="tab" wire:click="filter('is_completed')" class="tab {{($type == 'is_completed' && $value == 1 ) ? 'tab-active' : '' }}">{{__('Completed')}}</a>
+        <a role="tab" wire:click="filter('is_completed',0)" class="tab {{($type == 'is_completed' && $value == 0 ) ? 'tab-active' : '' }}">{{__('In Completed')}}<div class="badge badge-soft  badge-warning mx-1">{{$InCompleted_count}}</div></a>
+        <a role="tab" wire:click="filter('is_completed')" class="tab {{($type == 'is_completed' && $value == 1 ) ? 'tab-active' : '' }}">{{__('Completed')}}<div class="badge badge-soft badge-success mx-1">{{$completed_count}}</div></a>
+        <a role="tab" wire:click="filter('is_favorite')" class="tab {{$type ==  'is_favorite' ? 'tab-active' : '' }} ">{{__("Favorite")}}<div class="badge badge-soft badge-primary mx-1">{{$favorite_count}}</div></a>
+        <a role="tab" wire:click="filter('is_stop',1)" class="tab {{($type == 'is_stop' ) ? 'tab-active' : '' }}">{{__('Stopped')}} <div class="badge badge-soft badge-error mx-1">{{$stopped_count}}</div></a>
     </div>
     <div class="w-fit mx-auto my-3" >
         <span class="loading loading-dots loading-lg" wire:loading wire:target="filter"></span>
@@ -23,8 +24,7 @@
                         {{Str::limit($course->title,20)}}
                     </h2>
                     <div class="card-body p-2 gap-2">
-                        <progress class="progress" value="90" max="100"></progress>
-                        <div class="flex  items-center justify-between"><strong>4/5</strong> <strong>100%/90</strong> </div>
+                        @livewire('progress',['progress' => $this->progress($course->lessons_count,$course->completed_lessons_count)], key($course->id. rand(1, 100)))
                     </div>
                 </a>
             </div>

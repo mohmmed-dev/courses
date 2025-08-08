@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     @auth
-                        @livewire('path-action', ['id'=> $path->id ,'is_completed' => false , 'join' => false ] , key($path->id))
+                        @livewire('path-action', ['id'=> $path->id] , key($path->id))
                     @endauth
                     <div class="card-body p-2 gap-2">
                         <div class="card-actions justify-end">
@@ -54,8 +54,7 @@
         </div>
         <div class="card bg-base-100 shadow-sm mt-2 mb-2 col-start-2 w-full h-full col-span-10 rounded-md">
             <div class="card-body p-2 gap-2 ">
-                <div class="flex  items-center justify-between"><strong>{{$total ?? 0}}/{{$completed ?? 0 }}</strong> <strong>100%/{{$ch ?? 0}}%</strong> </div>
-                <progress class="progress" value="{{$ch ?? 0}}" max="100"></progress>
+                @livewire('progress', ['progress' => $progress], key($path->id))
             </div>
         </div>
         <div class="card bg-base-100 shadow-sm mt-2 mb-2 col-start-2 w-full h-full col-span-10 rounded-md">
@@ -73,7 +72,7 @@
                     <div class="my-3 w-fit mx-auto">
                         <label class="swap swap-flip "  >
                     <!-- this hidden checkbox controls the state -->
-                        <input type="checkbox" @disabled(true)  @checked($course->completed_by_users_exists)  class="hidden" />
+                        {{-- <input type="checkbox" @disabled(true)  @checked($course->completed_by_users_exists)  class="hidden" /> --}}
                         <div class="swap-on btn btn-circle btn-success ">
                             {{$course->pivot->order}}
                         </div>

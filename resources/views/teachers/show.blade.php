@@ -8,11 +8,11 @@
             </div>
             <div>
                 <h2 class="text-3xl">{{$teacher->name}}</h2>
-                <a href="{{$teacher->slug}}">{{$teacher->slug}}</a>
+                <a href="https://www.youtube.com/{{'@'.$teacher->slug}}">{{'@'.$teacher->slug}}</a>
             </div>
         </div>
         <div role="tablist" class="tabs tabs-lift w-full">
-            <div role="tab" class="tab tab-active">{{__('Courses')}} <span class="badge ">{{$teacher->courses_count}}</span> </div>
+            <div role="tab" class="tab tab-active">{{__('Courses')}} <span class="badge badge-soft badge-info mx-1">{{$teacher->courses_count}}</span> </div>
         </div>
     </div>
     <div class="grid grid-cols-12  gap-1 px-4">

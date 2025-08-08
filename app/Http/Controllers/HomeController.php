@@ -8,8 +8,7 @@ use App\Models\Course;
 use App\Models\Path;
 use Exception;
 use Illuminate\Http\Request;
-
-
+use App\Helpers\Avatars;
 
 class HomeController extends Controller
 {
@@ -46,7 +45,8 @@ class HomeController extends Controller
 
         // $lessons = Youtube::getPlaylistItemsByPlaylistId('PLoP3S2S1qTfCUdNazAZY1LFALcUr0Vbs9');
         // $data = $this->getPlaylistVideos('PLoP3S2S1qTfCUdNazAZY1LFALcUr0Vbs9');
-        // dd($data);
+        // $avatars = new Avatars();
+        // dd($avatars->generateAvatar('djdj'));
 
         $courses = Course::with(["teacher" => function($query) {
         $query->select('id',"slug","name");

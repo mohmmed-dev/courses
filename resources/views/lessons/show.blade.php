@@ -34,11 +34,8 @@
                 @livewire('lesson-check', ['is_completed' => $lesson->is_completed,'id' =>  $lesson->id])
             </div>
         </div>
-        <div class="my-2 col-start-2 w-full h-full col-span-10 sm:col-start-0 sm:col-span-12 lg:col-span-8 rounded-md ">
-            @livewire("player", ["course" => $course,"lesson" => $lesson])
-            {{-- @livewire("player", ["videoId" => $lesson->video_id]) --}}
-            {{-- <div id="player"></div> --}}
-            <x-player/>
+        <div class="w-full my-2 col-start-2 w-full h-full col-span-10 sm:col-start-0 sm:col-span-12 lg:col-span-8 rounded-md ">
+            <x-player videoId="{{$lesson->path_video}}"/>
         </div>
         <div class="my-2 col-start-2 w-full h-full col-span-10 sm:col-start-0 sm:col-span-12 md:col-span-6 lg:col-span-4 rounded-md">
             @livewire('lessons.lessons', ['course' => $course])

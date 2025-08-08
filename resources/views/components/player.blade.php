@@ -1,9 +1,11 @@
-<div>
+<div class="w-auto">
     <div id="player"></div>
 </div>
 
 @push('scripts')
+
 <script>
+    let video_id = @json($videoId) ;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -12,9 +14,9 @@
     var player;
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
-        height: '390',
-        width: '640',
-        videoId: 'M7lc1UVf-VE',
+        // height: '390',
+        width: '340',
+        videoId:  video_id ,
         playerVars: {
           'playsinline': 1
         },
@@ -36,6 +38,7 @@
         done = true;
       }
     }
+
     function stopVideo() {
       player.stopVideo();
     }

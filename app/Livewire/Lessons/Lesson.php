@@ -26,13 +26,14 @@ class Lesson extends Component
 
     public function view() {
         if(empty($this->user)) {
-            return redirect()->route('lesson.show',$this->lesson->slug);
+            // dd($this->lesson->id);
+            return redirect()->route('lesson.show',urlencode($this->lesson->slug));
         }
         $lessonPivot = $this->user->lessons()->where("lesson_id",$this->lesson->id)->get();
         if(count($lessonPivot) == 0) {
             $this->user->lessons()->attach($this->lesson->id);
         }
-        return redirect()->route('lesson.show',$this->lesson->slug);
+        return redirect()->route('lesson.show',urlencode($this->lesson->slug));
     }
 
     public function render()

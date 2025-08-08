@@ -5,8 +5,8 @@
         <input type="checkbox"  @checked($this->is_completed) @disabled($this->is_completed) wire:click="done" class="hidden" />
         <div class="swap-on btn btn-circle btn-success ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-      </svg>
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
 
         </div>
         <div class="swap-off btn btn-circle btn-soft btn-info ">
